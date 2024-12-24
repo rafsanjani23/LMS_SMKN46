@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+   font-family: "Inter", sans-serif;
+}
+
+aside,
+main,
+footer {
+   @apply transition-all duration-[400ms] ease-in-out;
+}
+
+#jumbotron {
+   /* background-image: url("https://plus.unsplash.com/premium_photo-1677567996070-68fa4181775a?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); */
+   @apply bg-cover bg-center;
+}
+
+/* === Toggle Sidebar === */
+.toggle-sidebar #sidebar {
+   @apply left-0 lg:left-[-300px];
+}
+
+.toggle-sidebar #main,
+.toggle-sidebar #footer {
+   @apply ml-0;
+}
+/* != Toggle Sidebar =! */
+
+/* === Profile === */
+.profile-active {
+   @apply bg-[#4A5B92] text-white;
+}
+
+.profile-active + div {
+   @apply scale-100 opacity-100;
+}
+/* != Profile =! */
+
+/* == Nav Link Sidebar == */
+.nav-link-sidebar {
+   @apply flex w-full items-center justify-start gap-4 py-3 pl-7 hover:bg-[#A9BBF4] hover:bg-opacity-[50%];
+}
+
+.nav-link-active {
+   @apply border-r-[5px] border-[#4a5b92] bg-[#A9BBF4] bg-opacity-50;
+}
+/* != Nav Link Sidebar =! */
+
+/* == Icon Color Based On Class == */
+.class-x {
+   @apply bg-[#D4F9E2];
+}
+.class-x i {
+   @apply text-[#55997C];
+}
+
+.class-xi {
+   @apply bg-[#D4DDF9];
+}
+.class-xi i {
+   @apply text-[#4A5B92];
+}
+
+.class-xii {
+   @apply bg-[#FFC1C2];
+}
+.class-xii i {
+   @apply text-[#A03739];
+}
+/* != Icon Color Based On Class =! */
+
+.sticky-at-bottom {
+   @apply fixed bottom-0 left-0 right-0;
+}
+
+.text-center-important {
+   text-align: center !important;
+}
+
+.text-class10 {
+   @apply text-[#55997C];
+}
+.text-class11 {
+   @apply text-[#4A5B92];
+}
+.text-class12 {
+   @apply text-[#A03739];
+}
