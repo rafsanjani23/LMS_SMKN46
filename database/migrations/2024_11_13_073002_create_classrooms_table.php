@@ -15,7 +15,7 @@ return new class extends Migration {
          $table->unsignedBigInteger("teacher_id");
          $table->foreign("teacher_id")->references("id")->on("teachers")->onDelete("cascade");
          $table->string("title");
-         $table->enum("major", ["pplg", "dkv", "akl", "otkp", "bdp"]);
+         $table->enum("major", ["pplg", "dkv", "akl", "mp", "bdp"]);
          $table->enum("class", ["x", "xi", "xii"]);
          $table->string("thumbnail_class");
          $table->text("instructions")->nullable();
