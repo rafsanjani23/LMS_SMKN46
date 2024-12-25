@@ -58,7 +58,7 @@
 
 
 									<div id="editModal-{{ $loop->iteration }}"
-										class="fixed inset-0 z-[1000] hidden bg-black bg-opacity-50 flex items-center justify-center">
+										class="fixed inset-0 z-[1000] hidden bg-black bg-opacity-50 flex items-center 	justify-center">
 										<div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
 											<h2 class="text-lg font-semibold mb-4">Grade Edit</h2>
 
