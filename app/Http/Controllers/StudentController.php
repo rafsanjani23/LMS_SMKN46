@@ -72,7 +72,7 @@ class StudentController extends Controller
       $validatedData = $request->validate([
          "fullname" => "required|string|max:255",
          "nis" => "required",
-         "major" => "required|in:pplg,dkv,akl,otkp,bdp",
+         "major" => "required|in:pplg,dkv,akl,mp,bdp",
          "grade" => "required|in:10,11,12",
          "date_of_birth" => "required|date",
          "gender" => "required|in:male,female",
@@ -103,7 +103,7 @@ class StudentController extends Controller
          "fullname" => "required|string|max:255",
          "username" => "required|string|max:255",
          "nis" => "required",
-         "major" => "required|in:pplg,dkv,akl,otkp,bdp",
+         "major" => "required|in:pplg,dkv,akl,mp,bdp",
          "grade" => "required|in:10,11,12",
          "date_of_birth" => "required|date",
          "gender" => "required|in:male,female",
