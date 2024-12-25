@@ -57,7 +57,7 @@
 									</div>
 
 									<div class="flex items-center">
-										<i class="fa-solid fa-ellipsis-vertical text-xl"></i>
+										{{-- <i class="fa-solid fa-ellipsis-vertical text-xl"></i> --}}
 									</div>
 								</div>
 							</div>
