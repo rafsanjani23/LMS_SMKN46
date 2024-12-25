@@ -98,7 +98,7 @@ class ClassroomController extends Controller
       $validatedData = $request->validate([
          "title" => "required|string|max:255",
          "class" => "required|in:x,xi,xii",
-         "major" => "required|in:pplg,dkv,akl,otkp,bdp",
+         "major" => "required|in:pplg,dkv,akl,mp,bdp",
          "instructions" => "nullable|string",
          "thumbnail_class" => "file|mimes:jpg,jpeg,png|max:3000",
       ]);
