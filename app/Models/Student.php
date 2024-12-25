@@ -30,7 +30,7 @@ class Student extends Model
       $majors = [
          "pplg" => "Pengembangan Perangkat Lunak dan Gim",
          "dkv" => "Desain Komunikasi Visual",
-         "otkp" => "Otomatisasi dan Tata Kelola Perkantoran",
+         "mp" => "Manajemen Perkantoran",
          "akl" => "Akuntansi dan Keuangan Lembaga",
          "bdp" => "Bisnis Daring dan Pemasaran",
       ];
