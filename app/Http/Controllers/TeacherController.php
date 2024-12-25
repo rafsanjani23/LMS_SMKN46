@@ -41,7 +41,7 @@ class TeacherController extends Controller
       $validatedData = $request->validate([
          "fullname" => "required|string|max:255",
          "nip" => "required",
-         "major" => "required|in:pplg,dkv,akl,otkp,bdp",
+         "major" => "required|in:pplg,dkv,akl,mp,bdp",
          "date_of_birth" => "required|date",
          "gender" => "required|in:male,female",
          "profile_picture" => "file|mimes:jpg,jpeg,png|max:3000",
