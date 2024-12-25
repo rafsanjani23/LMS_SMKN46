@@ -83,8 +83,7 @@
 									<option value="dkv" {{ $student->major == 'dkv' ? 'selected' : '' }}>DESAIN KOMUNIKASI VISUAL</option>
 									<option value="akl" {{ $student->major == 'akl' ? 'selected' : '' }}>AKUNTANSI DAN KEUANGAN LEMBAGA</option>
 									<option value="bdp" {{ $student->major == 'bdp' ? 'selected' : '' }}>BISNIS DARING DAN PEMASARAN</option>
-									<option value="otkp" {{ $student->major == 'otkp' ? 'selected' : '' }}>OTOMATISASI DAN TATA KELOLA
-										PERKANTORAN</option>
+									<option value="otkp" {{ $student->major == 'mp' ? 'selected' : '' }}>MANAJEMEN PERKANTORAN</option>
 								</select>
 								@error('major')
 									<div class="text-red-600 text-xs absolute bottom-[-20px]">
