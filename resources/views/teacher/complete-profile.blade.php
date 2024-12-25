@@ -26,8 +26,8 @@
 							<label class="pl-3 font-medium text-[#414141] text-opacity-50" for="nip">NIP<span
 									class="text-red-500">*</span></label>
 							<input id="nip" name="nip" placeholder="Your NIP"
-								class="w-full py-4 px-3 text-[#414141] text-opacity-50 bg-[#e8e8e8] focus:outline-none rounded-md" minlength="8"
-								maxlength="8" required>
+								class="w-full py-4 px-3 text-[#414141] text-opacity-50 bg-[#e8e8e8] focus:outline-none rounded-md" minlength="18"
+								maxlength="18" required>
 							@error('nip')
 								<div class="text-red-600 text-xs absolute bottom-[-20px]">
 									{{ $message }}
