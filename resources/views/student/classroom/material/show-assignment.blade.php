@@ -18,8 +18,15 @@
 					{{ $material->title }}
 				</h2>
 
-				<div>
-					<p>Deadline at {{ Carbon\Carbon::parse($material->deadline)->format('d F Y, H:i') }}</p>
+				<div class="flex items-center justify-between ">
+				<p>Deadline at {{ Carbon\Carbon::parse($material->deadline)->format('d F Y, H:i') }}</p>	
+				<p id="score" class="font-medium text-lg text-black"> <!--Memunculkan nilai tugas pada siswa-->
+   					@if(isset($score))
+        				{{ $score }}/100
+    				@else
+        				_/100
+    				@endif
+				</p>
 				</div>
 
 				<hr class="h-0.5 w-full bg-black my-5">

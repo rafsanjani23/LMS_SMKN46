@@ -172,6 +172,7 @@ class MaterialController extends Controller
       $assignment = Submission::where("user_id", Auth::user()->id)
          ->where("material_id", $material->id)
          ->where("classroom_id", $classroom->id)
+         ->select("id", "file_path", "file_type", "file_name", "submitted_at", "score")
          ->first();
 
       return view("student.classroom.material.show-assignment", [
@@ -179,6 +180,8 @@ class MaterialController extends Controller
          "material" => $material,
          "classroom" => $classroom,
          "assignment" => $assignment,
+         "score" => $assignment->score ?? null,
       ]);
    }
+
 }
