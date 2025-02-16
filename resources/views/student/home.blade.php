@@ -64,31 +64,35 @@
 
 		{{-- Upcoming Assignments --}}
 		<div class="mt-10">
-			<h2 class="text-3xl font-bold mb-4">Upcoming Assignments</h2>
-			<div class="w-full flex flex-wrap gap-3">
-				@forelse ($assignments as $assignment)
-					@if (!$assignment['is_submitted'])
-						<a
-							href="{{ route('student.show.assignment', ['classroom' => $assignment['material']->classroom, 'material' => $assignment['material']]) }}"
-							class="w-full sm:h-[100px] h-[80px] flex items-center justify-start px-[20px] sm:px-[30px] gap-4 border-2 border-black border-opacity-20 shadow rounded-md hover:bg-slate-300 transition">
-							<div
-								class="flex justify-center items-center min-w-[40px] min-h-[40px] w-[40px] sm:min-w-[50px] sm:w-[50px] h-[40px] sm:min-h-[50px] sm:h-[50px] bg-[#D4DDF9] rounded-full">
-								<i class="fa-regular fa-file text-[#4A5B92] sm:text-[30px] text-[20px]"></i>
-							</div>
-							<div class="flex-1 min-w-0">
-								<h3 class="w-full sm:text-xl text-base font-semibold overflow-hidden whitespace-nowrap text-ellipsis">
-									Kelas {{ Str::upper($assignment['material']->classroom->class) }}
-									{{ Str::upper($assignment['material']->classroom->major) }} -
-									{{ $assignment['material']->title }}
-								</h3>
-								<p class="sm:text-base text-sm">Deadline: {{ $assignment['material']->deadline }}</p>
-							</div>
-						</a>
-					@endif
-				@empty
-				@endforelse
-			</div>
+    		<h2 class="text-3xl font-bold mb-4">Upcoming Assignments</h2>
+    		<div class="w-full flex flex-wrap gap-3">
+        		@php
+            		$upcomingAssignments = collect($assignments)->filter(fn($assignment) => !$assignment['is_submitted']);
+        		@endphp
 
+       	 		@if ($upcomingAssignments->isEmpty())
+            		<p>No upcoming assignments right now.</p>
+        		@else
+            		@foreach ($upcomingAssignments as $assignment)
+                		<a
+                    		href="{{ route('student.show.assignment', ['classroom' => $assignment['material']->classroom, 'material' => $assignment['material']]) }}"
+                    		class="w-full sm:h-[100px] h-[80px] flex items-center justify-start px-[20px] sm:px-[30px] gap-4 border-2 border-black border-opacity-20 shadow rounded-md hover:bg-slate-300 transition">
+                    		<div
+                        		class="flex justify-center items-center min-w-[40px] min-h-[40px] w-[40px] sm:min-w-[50px] sm:w-[50px] h-[40px] sm:min-h-[50px] sm:h-[50px] bg-[#D4DDF9] rounded-full">
+                        		<i class="fa-regular fa-file text-[#4A5B92] sm:text-[30px] text-[20px]"></i>
+                    		</div>
+                    		<div class="flex-1 min-w-0">
+                        		<h3 class="w-full sm:text-xl text-base font-semibold overflow-hidden whitespace-nowrap text-ellipsis">
+                            		Kelas {{ Str::upper($assignment['material']->classroom->class) }}
+                            		{{ Str::upper($assignment['material']->classroom->major) }} -
+                            		{{ $assignment['material']->title }}
+                        		</h3>
+                        		<p class="sm:text-base text-sm">Deadline: {{ $assignment['material']->deadline }}</p>
+                    		</div>
+                		</a>
+            		@endforeach
+        		@endif
+    		</div>
 		</div>
 
 		{{-- == Calendar == --}}
