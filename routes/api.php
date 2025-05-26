@@ -9,12 +9,17 @@ Route::get("/teacher/classes/{classroom}/people", function (Classroom $classroom
    // $enrolledUsers = $classroom->users()->wherePivot("status", "enrolled")->get();
 
    $enrolledUserIds = $classroom->enrollments()->pluck("user_id");
-   $unenrolledUsers = User::whereNotIn("users.id", $enrolledUserIds)
-      ->join("students", "students.user_id", "=", "users.id")
-      ->where("students.major", $classroom->major)
-      ->where("students.grade", $classroom->classToNumber())
-      ->select("users.*")
-      ->get();
+
+   $unenrolledUsersQuery = User::whereNotIn("users.id", $enrolledUserIds)
+       ->join("students", "students.user_id", "=", "users.id")
+       ->where("students.grade", $classroom->classToNumber());
+
+   // Tambahkan filter major hanya jika classroom bukan "umum"
+   if ($classroom->major !== 'umum') {
+       $unenrolledUsersQuery->where("students.major", $classroom->major);
+   }
+
+   $unenrolledUsers = $unenrolledUsersQuery->select("users.*")->get();
 
    return UnenrolledStudentsDetails::collection($unenrolledUsers);
 });

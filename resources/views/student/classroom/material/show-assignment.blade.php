@@ -47,7 +47,23 @@
 
 				<div class="mt-8 flex items-center justify-between ">
 					<p class="text-xl font-bold">Your Work</p>
-					<p id="isAssigned" class="font-medium text-lg text-red-500">Assigned</p>
+					<p id="isAssigned" class="font-medium text-lg 
+    					@if(isset($score))
+       					 text-green-600
+    					@elseif($assignment)
+       					 text-gray-500
+    					@else
+       					 text-red-500
+    					@endif
+					">
+    					@if(isset($score))
+        					Graded
+    					@elseif($assignment)
+        					Turned In
+   					 	@else
+        					Assigned
+    					@endif
+					</p>
 				</div>
 
 				<hr class="h-0.5 w-full bg-black my-5">
@@ -60,33 +76,37 @@
 						<div id="file-display" class="w-full"></div>
 
 						@if ($assignment)
-							<a href="{{ Storage::url($assignment->file_path) }}" class="block w-full" id="student-assignment">
-								<div class="bg-white border-2 border-[#919191] rounded-md flex items-center gap-4 px-6 py-4">
-									<div class="min-w-[40px] min-h-[40px] bg-[#D4DDF9] flex items-center justify-center rounded-full">
-										<i class="fa-regular fa-file text-xl text-[#4A5B92]"></i>
-									</div>
-									<div>
-										<p class="font-bold">{{ $assignment->file_name }}</p>
-										<p>{{ Str::upper($assignment->file_type) }}</p>
-									</div>
-								</div>
-							</a>
-							<div id="unsubmit"
-								class="cursor-pointer w-full py-3 text-center rounded-md text-lg font-bold border-2 border-[#919191] text-[#4A5B92] hover:bg-[#4A5B92] hover:text-white">
-								Unsubmit
-							</div>
-							<div id="file-button"
-								class="add-assignment cursor-pointer w-full py-3 bg-[#A9BBF4] text-center rounded-md text-lg font-bold hover:bg-[#9eafe5] hidden"
-								onclick="document.getElementById('file-input').click();">
-								+ Add Assignment
-							</div>
+    						<a href="{{ Storage::url($assignment->file_path) }}" class="block w-full" id="student-assignment">
+        						<div class="bg-white border-2 border-[#919191] rounded-md flex items-center gap-4 px-6 py-4">
+            						<div class="min-w-[40px] min-h-[40px] bg-[#D4DDF9] flex items-center justify-center rounded-full">
+                						<i class="fa-regular fa-file text-xl text-[#4A5B92]"></i>
+            						</div>
+            							<div>
+                						<p class="font-bold">{{ $assignment->file_name }}</p>
+                						<p>{{ Str::upper($assignment->file_type) }}</p>
+            						</div>
+        						</div>
+    						</a>
+
+    					@if (!isset($score)) {{-- Tampilkan tombol unsubmit hanya jika belum ada nilai --}}
+    						<div id="unsubmit"
+        						class="cursor-pointer w-full py-3 text-center rounded-md text-lg font-bold border-2 border-[#919191] text-[#4A5B92] hover:bg-[#4A5B92] hover:text-white">
+        							Unsubmit
+    						</div>
+    						<div id="file-button"
+        						class="add-assignment cursor-pointer w-full py-3 bg-[#A9BBF4] text-center rounded-md text-lg font-bold hover:bg-[#9eafe5] hidden"
+        						onclick="document.getElementById('file-input').click();">
+        						+ Add Assignment
+    						</div>
+    					@endif
+						
 						@else
-							<!-- Add Assignment Button -->
-							<div id="file-button"
-								class="cursor-pointer w-full py-3 bg-[#A9BBF4] text-center rounded-md text-lg font-bold hover:bg-[#9eafe5]"
-								onclick="document.getElementById('file-input').click();">
-								+ Add Assignment
-							</div>
+    					<!-- Kondisi belum mengumpulkan -->
+    						<div id="file-button"
+        						class="cursor-pointer w-full py-3 bg-[#A9BBF4] text-center rounded-md text-lg font-bold hover:bg-[#9eafe5]"
+        						onclick="document.getElementById('file-input').click();">
+        						+ Add Assignment
+    						</div>
 						@endif
 
 						<!-- Hidden File Input -->
@@ -111,8 +131,15 @@
 		const isUpdate = document.querySelector('[name=isUpdate]')
 
 		if (unsubmit) {
-			isAssigned.classList.remove('text-red-500')
-			isAssigned.textContent = 'Turned In'
+    		const score = "{{ isset($score) ? $score : '' }}";
+    		if (score) {
+        		// Jika sudah ada nilai, jangan ubah status via JS karena sudah dihandle di Blade
+        		unsubmit.remove(); // tombol unsubmit disembunyikan via JS juga untuk jaga-jaga
+    		} else {
+        		isAssigned.classList.remove('text-red-500');
+        		isAssigned.classList.add('text-black');
+        		isAssigned.textContent = 'Turned In';
+    		}
 		}
 
 		unsubmit.addEventListener('click', (e) => {

@@ -131,14 +131,18 @@ class StudentController extends Controller
    public function showClassList()
    {
       $student = Auth::user()->student;
-      $classes = Classroom::where("major", $student->major)
-         ->where("class", $student->gradeToRoman())
-         ->get();
 
-      return view("student.classes", [
-         "title" => "Classes",
-         "classes" => $classes,
-         "student" => $student,
+      $classes = Classroom::where(function ($query) use ($student) {
+         $query->where('major', $student->major)
+               ->orWhere('major', 'umum'); // Kelas umum bisa diakses semua jurusan
+      })
+      ->where('class', $student->gradeToRoman()) // Tetap filter berdasarkan tingkat kelas
+      ->get();
+
+      return view('student.classes', [
+         'title' => 'Classes',
+         'classes' => $classes,
+         'student' => $student,
       ]);
    }
 }
