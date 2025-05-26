@@ -71,7 +71,7 @@
         		@endphp
 
        	 		@if ($upcomingAssignments->isEmpty())
-            		<p>No upcoming assignments right now.</p>
+            		<p>-- No upcoming assignments right now, <br>check back later for new assignments. --</p>
         		@else
             		@foreach ($upcomingAssignments as $assignment)
                 		<a

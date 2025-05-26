@@ -85,8 +85,13 @@ class AdminController extends Controller
 
    function updateStudents(Request $request, $id)
    {
-      $user = User::find($id);
-      $user->name = $request->name;
+      $user = User::with('student')->findOrFail($id);
+
+      if ($user->student) {
+          $user->student->fullname = $request->fullname;
+          $user->student->update();
+      }
+      
       $user->username = $request->username;
       $user->email = $request->email;
       $user->password = $request->password;
@@ -152,8 +157,13 @@ class AdminController extends Controller
 
    function updateTeacher(Request $request, $id)
    {
-      $user = User::find($id);
-      $user->name = $request->name;
+      $user = User::with('teacher')->findOrFail($id);
+
+      if ($user->teacher) {
+          $user->teacher->fullname = $request->fullname;
+          $user->teacher->update();
+      }
+
       $user->username = $request->username;
       $user->email = $request->email;
       $user->password = $request->password;

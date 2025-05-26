@@ -12,9 +12,18 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\WebController;
 
 Route::redirect("/", "/login");
 Route::redirect("/teacher", "/teacher/home");
+
+Route::get('reset-password', [WebController::class, 'resetPassword'])->name('reset-password');
+
+Route::post('reset-password/send', [WebController::class, 'processResetPassword'])->name('reset-password.send');
+
+Route::get('reset-password/change', [WebController::class, 'changeResetPassword'])->name('password.reset');
+
+Route::post('reset-password/change/save', [WebController::class, 'changeProcessResetPassword'])->name('password.reset.save');
 
 Route::post("/logout", [SesiController::class, "logout"])
    ->name("logout")
@@ -122,4 +131,6 @@ Route::middleware(["auth"])->group(function () {
       Route::post("/classes/{classroom}/materials/{material}/submissions", "submitAssignment")->name("submit.assignment");
       Route::put("/teacher/grade/{material}/update-score/{submission}", "updateStudentScore")->name("update.student.score");
    });
+
+   Route::get('/teacher/classroom/{classroom}/recap/excel', [ClassroomController::class, 'exportExcel'])->name('teacher.classroom.recap.export.excel');
 });

@@ -13,17 +13,17 @@
         <div class="p-6">
             <form action="{{ route('update.teacher', $users->id) }}" method="post" class="space-y-6">
                 @csrf
-                <!-- Name -->
+                <!-- Fullname -->
                 <div class="relative">
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Fullname</label>
                     <div class="flex items-center border border-gray-300 rounded-lg">
                         <i class="fa-solid fa-user px-4 text-gray-500"></i>
                         <input 
                             type="text" 
-                            name="name" 
-                            id="name"
-                            value="{{ $users->name }}" 
-                            placeholder="Enter teacher's name"
+                            name="fullname" 
+                            id="fullname"
+                            value="{{ $users->teacher->fullname ?? '' }}" 
+                            placeholder="Enter teacher's fullname"
                             class="flex-1 py-2 pr-4  focus:outline-none rounded-lg"
                             required>
                     </div>

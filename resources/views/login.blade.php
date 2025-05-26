@@ -30,6 +30,11 @@
                             <input type="password" name="password" placeholder="Password" class="w-full bg-transparent focus:outline-none placeholder-gray-400 text-gray-700">
                         </div>
                     </div>
+
+                    <div class="text-right mb-4">
+                        <a href="{{ route('reset-password') }}" class="text-sm text-slate-500 hover:underline">Forgot Password?</a>
+                    </div>
+
                     <button type="submit" class="btn hover:bg-[#4A5B92] hover:text-white">
                         <p class="font-semibold">Login</p>
                     </button>

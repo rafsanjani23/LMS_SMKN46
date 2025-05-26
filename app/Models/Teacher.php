@@ -32,6 +32,7 @@ class Teacher extends Model
          "mp" => "Manajemen Perkantoran",
          "akl" => "Akuntansi dan Keuangan Lembaga",
          "bdp" => "Bisnis Daring dan Pemasaran",
+         "umum" => "Umum",
       ];
 
       return Str::upper($majors[$this->major]);

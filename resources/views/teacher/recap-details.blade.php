@@ -6,7 +6,13 @@
 			<div class="bg-white p-6 rounded-md">
 				<h2 class="text-3xl font-bold mb-4">Grade Recap From {{ $classroom->title }} Class</h2>
 				<hr class="h-0.5 w-full bg-stone-400 mb-10">
-
+				
+				<div class="flex gap-4 mb-4">
+   					<a href="{{ route('teacher.classroom.recap.export.excel', $classroom->id) }}"
+      					class="inline-flex items-center bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+      					<i class="fas fa-file-excel mr-2"></i> Download Excel
+   					</a>
+				</div>
 
 				<div class="w-full overflow-x-auto">
 					<table class="w-full border-collapse">

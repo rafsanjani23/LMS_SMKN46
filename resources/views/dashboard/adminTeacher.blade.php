@@ -26,23 +26,39 @@
 			<table class="min-w-full bg-white text-sm rounded-lg">
 				<thead class="bg-[#4A5B92] text-white">
 					<tr>
-						<th class="px-4 py-4 text-left">No</th>
-						<th class="px-4 py-4 text-left">Nama</th>
-						<th class="px-4 py-4 text-left">Username</th>
-						<th class="px-4 py-4 text-left">Email</th>
-						<th class="px-4 py-4 text-left">Role</th>
-						<th class="px-4 py-4 text-left">Action</th>
+                    	<th class="px-4 py-4 text-left">No</th>
+                    	<th class="px-4 py-4 text-left">Fullname</th>
+                    	<th class="px-4 py-4 text-left">Username</th>
+                    	<th class="px-4 py-4 text-left">NIP</th>
+                    	<th class="px-4 py-4 text-left">Date of Birth</th>
+                    	<th class="px-4 py-4 text-left">Gender</th>
+						<th class="px-4 py-4 text-left">Major</th>
+                    	<th class="px-4 py-4 text-left">Profile Picture</th>
+                    	<th class="px-4 py-4 text-left">Email</th>
+                    	<th class="px-4 py-4 text-left">Role</th>
+                    	<th class="px-4 py-4 text-left">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach ($users as $no => $data)
 						<tr class="border-b border-gray-200 hover:bg-gray-100">
-							<td class="px-4 py-4">{{ $no + 1 }}</td>
-							<td class="px-4 py-4">{{ $data->name }}</td>
-							<td class="px-4 py-4">{{ $data->username }}</td>
-							<td class="px-4 py-4">{{ $data->email }}</td>
-							<td class="px-4 py-4">{{ $data->role }}</td>
-							<td class="px-4 py-4 flex items-center space-x-4">
+							<td class="px-4 py-4">{{ $no+1 }}</td>
+                        	<td class="px-4 py-4">{{ $data->teacher->fullname ?? 'Belum diisi' }}</td>
+                        	<td class="px-4 py-4">{{ $data->username }}</td>
+                        	<td class="px-4 py-4">{{ $data->teacher->nip ?? 'Belum diisi' }}</td>
+                        	<td class="px-4 py-4">{{ $data->teacher->date_of_birth ?? 'Belum diisi' }}</td>
+                        	<td class="px-4 py-4">{{ $data->teacher->gender ?? 'Belum diisi' }}</td>
+							<td class="px-4 py-4">{{ $data->teacher->major ?? 'Belum diisi' }}</td>
+                        	<td class="px-4 py-4">
+                            	@if ($data->teacher && $data->teacher->profile_picture)
+                                	<img src="{{ Storage::url($data->teacher->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+                            	@else
+									<img src="{{ Storage::url('/profile-default/teacher-profile-default.png') }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+                            	@endif
+                        	</td>
+                        	<td class="px-4 py-4">{{ $data->email }}</td>
+                        	<td class="px-4 py-4">{{ $data->role }}</td>
+							<td class="px-4 py-4 items-center space-x-4"> <!--flex dihapus-->
 								<a href="{{ route('edit.teacher', $data->id) }}" class="text-blue-500 hover:text-blue-700">
 									<i class="fa-solid fa-user-pen fa-lg"></i>
 								</a>

@@ -62,4 +62,10 @@ class Classroom extends Model
    {
       return $this->hasMany(Enrollment::class);
    }
+
+   public function students()
+   {
+       return $this->belongsToMany(User::class, 'submissions');
+   }
+   
 }

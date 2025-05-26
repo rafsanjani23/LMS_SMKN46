@@ -14,7 +14,7 @@
 			<div class="w-[130px] h-[130px] rounded-full overflow-hidden">
 				<img class="object-cover w-full h-full" src="{{ Storage::url(Auth::user()->getUserProfile()) }}" alt="profile-picture">
 			</div>
-			<h3 class="text-xl font-semibold mt-4">{{ Auth::user()->username }}</h3>
+			<h3 class="text-xl font-semibold mt-4">{{ Auth::user()->student->fullname ? \Illuminate\Support\Str::limit(Auth::user()->student->fullname, 25) : 'Belum diisi' }}</h3>
 			<p class="text-sm">{{ ucfirst(Auth::user()->role) }}</p>
 			<a class="bg-[#A9BBF4] hover:bg-[#92a1d2] py-3 px-14 text-xl font-semibold mt-4 rounded"
 				href="{{ route('student.profile') }}">View
@@ -49,7 +49,7 @@
 				<img class="object-cover w-full h-full" src="{{ Storage::url(Auth::user()->getUserProfile()) }}"
 					alt="profile-picture">
 			</div>
-			<h3 class="text-xl font-semibold mt-4">{{ Auth::user()->username }}</h3>
+			<h3 class="text-xl font-semibold mt-4">{{ Auth::user()->teacher->fullname ?? 'Belum diisi' }}</h3>
 			<p class="text-sm">{{ ucfirst(Auth::user()->role) }}</p>
 			<a class="bg-[#A9BBF4] hover:bg-[#92a1d2] py-3 px-14 text-xl font-semibold mt-4 rounded"
 				href="{{ route('teacher.profile') }}">View

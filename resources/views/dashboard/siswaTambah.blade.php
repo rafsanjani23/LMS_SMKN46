@@ -15,7 +15,7 @@
                 @csrf
                 <!-- Name -->
                 <div class="relative">
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
                     <div class="flex items-center border border-gray-300 rounded-lg">
                         <i class="fa-solid fa-user px-4 text-gray-500"></i>
                         <input 
