@@ -9,88 +9,96 @@ use Carbon\Carbon;
 
 class WebController extends Controller
 {
-    public function resetPassword()
-    {
-        return view('request-reset-password');
-    }
+   public function resetPassword()
+   {
+      return view("request-reset-password");
+   }
 
-    public function processResetPassword(Request $request)
-    {
-        $request->validate([
-            'email' => 'required'
-        ]);
+   public function processResetPassword(Request $request)
+   {
+      $request->validate([
+         "email" => "required",
+      ]);
 
-        $user = User::where('email', $request->email)->first();
+      $user = User::where("email", $request->email)->first();
 
-        if (!$user) {
-            return "Alamat Email Tidak Terdaftar";
-        }
+      if (!$user) {
+         return "Alamat Email Tidak Terdaftar";
+      }
 
-        $tokenBefore = DB::table('password_reset_tokens')->where('email', $user->email)->first();
+      $tokenBefore = DB::table("password_reset_tokens")
+         ->where("email", $user->email)
+         ->first();
 
-        if ($tokenBefore) {
-            $tokenTime = \Carbon\Carbon::parse($tokenBefore->created_at);
-            if ($tokenTime->diffInMinutes(now()) < 60) {
-                return view('sudah-send-reset-password');
-            }
-        
-            DB::table('password_reset_tokens')->where('email', $user->email)->delete();
-        }        
+      if ($tokenBefore) {
+         $tokenTime = \Carbon\Carbon::parse($tokenBefore->created_at);
+         if ($tokenTime->diffInMinutes(now()) < 0) {
+            return view("sudah-send-reset-password");
+         }
 
-        $token = $user->createToken('password_reset')->plainTextToken;
+         DB::table("password_reset_tokens")
+            ->where("email", $user->email)
+            ->delete();
+      }
 
-        DB::table('password_reset_tokens')->insert([
-            'email' => $user->email,
-            'token' => $token,
-            'created_at' => now()
-        ]);
+      $token = $user->createToken("password_reset")->plainTextToken;
 
-        $user->sendPasswordResetNotification($token);
+      DB::table("password_reset_tokens")->insert([
+         "email" => $user->email,
+         "token" => $token,
+         "created_at" => now(),
+      ]);
 
-        return view('generate-baru-reset-password');
-    }
+      $user->sendPasswordResetNotification($token);
 
-    public function changeResetPassword(Request $request)
-    {
-        $token = $request->token;
+      return view("generate-baru-reset-password");
+   }
 
-        if(!$token) {
-            return redirect('/login');
-        }
+   public function changeResetPassword(Request $request)
+   {
+      $token = $request->token;
 
-        $activeToken = DB::table('password_reset_tokens')->where('token', $token)->first();
-        
-        if (!$activeToken) {
-            return redirect('/login');
-        }
+      if (!$token) {
+         return redirect("/login");
+      }
 
-        return view('change-reset-password', [
-            'token' => $token,
-            'email' => $activeToken->email
-        ]);
-    }
+      $activeToken = DB::table("password_reset_tokens")->where("token", $token)->first();
 
-    public function changeProcessResetPassword(Request $request)
-    {
-        $request->validate([
-            'token' => 'required',
-            'password' => 'required'
-        ]);
+      if (!$activeToken) {
+         return redirect("/login");
+      }
 
-        $activeToken = DB::table('password_reset_tokens')->where('token', $request->token)->first();
+      return view("change-reset-password", [
+         "token" => $token,
+         "email" => $activeToken->email,
+      ]);
+   }
 
-        if(!$activeToken) {
-            return redirect('/login');
-        }
+   public function changeProcessResetPassword(Request $request)
+   {
+      $request->validate([
+         "token" => "required",
+         "password" => "required",
+      ]);
 
-        $user = User::where('email', $activeToken->email)->first();
+      $activeToken = DB::table("password_reset_tokens")
+         ->where("token", $request->token)
+         ->first();
 
-        $user->update([
-            'password' => bcrypt($request->password)
-        ]);
+      if (!$activeToken) {
+         return redirect("/login");
+      }
 
-        DB::table('password_reset_tokens')->where('token', $request->token)->delete();
+      $user = User::where("email", $activeToken->email)->first();
 
-        return view('password-berhasil-diubah');
-    }
+      $user->update([
+         "password" => bcrypt($request->password),
+      ]);
+
+      DB::table("password_reset_tokens")
+         ->where("token", $request->token)
+         ->delete();
+
+      return view("password-berhasil-diubah");
+   }
 }
