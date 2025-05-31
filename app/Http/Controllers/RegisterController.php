@@ -19,14 +19,14 @@ class RegisterController extends Controller
 
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'fullname' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         User::create([
             'email' => $request->email,
-            'name' => $request->name,
+            'fullname' => $request->fullname,
             'password' => Hash::make($request->password),
             'role' => 'user', // atau role lain yang sesuai, bisa juga ditambahkan dari input
         ]);

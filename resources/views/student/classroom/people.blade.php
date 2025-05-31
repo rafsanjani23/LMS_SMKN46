@@ -28,7 +28,7 @@
 								<div class="flex items-center gap-x-4">
 									<div class="w-[50px] h-[50px] overflow-hidden rounded-full">
 										<img class="w-full h-full object-cover object-center"
-											src="{{ Storage::url($teacher->profile_picture ?? '/profile-default/teacher-profile-default.png') }}">
+											src="{{ Storage::url($classroom->teacher->profile_picture ?? '/profile-default/teacher-profile-default.png') }}">
 									</div>
 									<p class="font-medium text-lg text-[#757575]">{{ $classroom->teacher->fullname }}</p>
 								</div>

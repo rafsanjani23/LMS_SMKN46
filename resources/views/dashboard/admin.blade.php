@@ -61,13 +61,7 @@
 
             {{-- Fullname --}}
             <td class="px-4 py-4">
-                @if ($data->role === 'student')
-                    {{ $data->student->fullname ?? 'Belum diisi' }}
-                @elseif ($data->role === 'teacher')
-                    {{ $data->teacher->fullname ?? 'Belum diisi' }}
-                @else
-                    -
-                @endif
+                {!! wordwrap($data->fullname, 27, '<br>', true) !!}
             </td>
 
             {{-- Username --}}
@@ -119,23 +113,22 @@
 
             {{-- Foto Profil --}}
             <td class="px-4 py-4">
-    @if ($data->role === 'student')
-        @if ($data->student && $data->student->profile_picture)
-            <img src="{{ Storage::url($data->student->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
-        @else
-            <img src="{{ Storage::url('/profile-default/student-profile-default.png') }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
-        @endif
-    @elseif ($data->role === 'teacher')
-        @if ($data->teacher && $data->teacher->profile_picture)
-            <img src="{{ Storage::url($data->teacher->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
-        @else
-            <img src="{{ Storage::url('/profile-default/teacher-profile-default.png') }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
-        @endif
-    @else
-        <span>-</span>
-    @endif
-</td>
-
+                @if ($data->role === 'student')
+                    @if ($data->student && $data->student->profile_picture)
+                        <img src="{{ Storage::url($data->student->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+                    @else
+                        <img src="{{ Storage::url('/profile-default/student-profile-default.png') }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+                    @endif
+                @elseif ($data->role === 'teacher')
+                    @if ($data->teacher && $data->teacher->profile_picture)
+                        <img src="{{ Storage::url($data->teacher->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+                    @else
+                        <img src="{{ Storage::url('/profile-default/teacher-profile-default.png') }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+                    @endif
+                @else
+                    <span>-</span>
+                @endif
+            </td>
 
             {{-- Email --}}
             <td class="px-4 py-4">{{ $data->email }}</td>

@@ -10,7 +10,7 @@
 					<a href="{{ route('show.recap.details', $classroom) }}">
 
 						<div
-							class="p-4 border-2 rounded-md border-black border-opacity-20 shadow hover:scale-[1.05] active:scale-90 transition duration-200">
+							class="p-4 border-2 rounded-md border-black border-opacity-20 shadow hover:scale-[1.05] active:scale-90 transition duration-200 h-[340px]">
 							<div class="w-full h-[150px] rounded overflow-hidden">
 								<img src="{{ Storage::url($classroom->thumbnail_class) }}" class="w-full h-full object-cover object-center"
 									alt="">
