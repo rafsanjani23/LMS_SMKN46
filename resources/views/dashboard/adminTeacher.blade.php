@@ -43,7 +43,7 @@
 					@foreach ($users as $no => $data)
 						<tr class="border-b border-gray-200 hover:bg-gray-100">
 							<td class="px-4 py-4">{{ $no+1 }}</td>
-                        	<td class="px-4 py-4">{!! wordwrap($data->teacher->fullname, 27, '<br>', true) !!}</td>
+                        	<td class="px-4 py-4">{!! wordwrap($data->fullname, 27, '<br>', true) !!}</td>
                         	<td class="px-4 py-4">{{ $data->username }}</td>
                         	<td class="px-4 py-4">{{ $data->teacher->nip ?? 'Belum diisi' }}</td>
                         	<td class="px-4 py-4">{{ $data->teacher->date_of_birth ?? 'Belum diisi' }}</td>

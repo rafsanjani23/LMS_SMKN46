@@ -13,16 +13,16 @@
         <div class="p-6">
             <form action="{{ route('adminRegistStudent.submit') }}" method="post" class="space-y-6" id="add-student-form">
                 @csrf
-                <!-- Name -->
+                <!-- Fullame -->
                 <div class="relative">
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Fullame</label>
                     <div class="flex items-center border border-gray-300 rounded-lg">
                         <i class="fa-solid fa-user px-4 text-gray-500"></i>
                         <input 
                             type="text" 
-                            name="name" 
-                            id="name" 
-                            placeholder="Enter student's name"
+                            name="fullname" 
+                            id="fullname" 
+                            placeholder="Enter student's fullname"
                             class="flex-1 py-2 pr-4 focus:outline-none rounded-lg"
                             required>
                     </div>
