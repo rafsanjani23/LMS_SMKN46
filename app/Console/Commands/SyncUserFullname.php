@@ -9,33 +9,32 @@ use App\Models\Teacher;
 
 class SyncUserFullname extends Command
 {
-    protected $signature = 'users:sync-fullname';
-    protected $description = 'Sync fullname from students and teachers to users table';
+   protected $signature = "users:sync-fullname";
+   protected $description = "Sync fullname from students and teachers to users table";
 
-    public function handle()
-    {
-        // Student
-        $students = Student::with('user')->get();
-        foreach ($students as $student) {
-            if ($student->user) {
-                $student->user->fullname = $student->fullname;
-                $student->user->save();
-            }
-        }
+   public function handle()
+   {
+      // Student
+      $students = Student::with("user")->get();
+      foreach ($students as $student) {
+         if ($student->user) {
+            $student->user->fullname = $student->fullname;
+            $student->user->save();
+         }
+      }
 
-        // Teacher
-        $teachers = Teacher::with('user')->get();
-        foreach ($teachers as $teacher) {
-            if ($teacher->user) {
-                $teacher->user->fullname = $teacher->fullname;
-                $teacher->user->save();
-            }
-        }
+      // Teacher
+      $teachers = Teacher::with("user")->get();
+      foreach ($teachers as $teacher) {
+         if ($teacher->user) {
+            $teacher->user->fullname = $teacher->fullname;
+            $teacher->user->save();
+         }
+      }
 
-        // Admin
-        User::where('role', 'admin')
-            ->update(['fullname' => 'Kepala Sekolah']);
+      // Admin
+      User::where("role", "admin")->update(["fullname" => "Kepala Labotarium"]);
 
-        $this->info('Fullname synced successfully.');
-    }
+      $this->info("Fullname synced successfully.");
+   }
 }
