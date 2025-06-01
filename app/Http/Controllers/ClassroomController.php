@@ -99,7 +99,7 @@ class ClassroomController extends Controller
       $validatedData = $request->validate([
          "title" => "required|string|max:32",
          "class" => "required|in:x,xi,xii",
-         "major" => "required|in:pplg,dkv,akl,mp,bdp,umum",
+         // "major" => "required|in:pplg,dkv,akl,mp,bdp,umum",
          "instructions" => "nullable|string",
          "thumbnail_class" => "file|mimes:jpg,jpeg,png|max:3000",
       ]);
@@ -157,49 +157,50 @@ class ClassroomController extends Controller
 
    public function exportExcel(Classroom $classroom)
    {
-       // Ambil semua material unik yang ada di kelas ini
-       $materialIds = Submission::where('classroom_id', $classroom->id)
-           ->select('material_id')
-           ->distinct()
-           ->pluck('material_id')
-           ->toArray();
-   
-       sort($materialIds); // urutkan
-   
-       // Ambil user yang punya submission di kelas ini
-       $users = User::whereHas('submissions', function ($q) use ($classroom) {
-           $q->where('classroom_id', $classroom->id);
-       })->get();
-   
-       $recap = $users->map(function ($user) use ($materialIds, $classroom) {
-           $fullname = optional($user->student)->fullname;
-   
-           // Semua submission user ini di kelas
-           $submissions = $user->submissions()
-               ->where('classroom_id', $classroom->id)
-               ->get();
-   
-           // Nilai tugas berdasarkan urutan material_id
-           $taskScores = [];
-           foreach ($materialIds as $materialId) {
-               $score = $submissions->firstWhere('material_id', $materialId)->score ?? '-';
-               $taskScores[] = $score;
-           }
-   
-           $validScores = $submissions->pluck('score')->filter();
-   
-           return [
-               'name' => $fullname ?? $user->name,
-               'tasks' => $taskScores,
-               'average' => $validScores->avg() ?? '-',
-               'max' => $validScores->max() ?? '-',
-               'min' => $validScores->min() ?? '-',
-           ];
-       });
-       
-       $today = now()->format('d-m-Y');
-       $filename = 'Grade Recap From ' . $classroom->title . ' Class [' . $today . '].xlsx';
+      // Ambil semua material unik yang ada di kelas ini
+      $materialIds = Submission::where("classroom_id", $classroom->id)
+         ->select("material_id")
+         ->distinct()
+         ->pluck("material_id")
+         ->toArray();
 
-       return Excel::download(new \App\Exports\RecapExport($recap, $materialIds, $classroom), $filename);
-   }    
+      sort($materialIds); // urutkan
+
+      // Ambil user yang punya submission di kelas ini
+      $users = User::whereHas("submissions", function ($q) use ($classroom) {
+         $q->where("classroom_id", $classroom->id);
+      })->get();
+
+      $recap = $users->map(function ($user) use ($materialIds, $classroom) {
+         $fullname = optional($user->student)->fullname;
+
+         // Semua submission user ini di kelas
+         $submissions = $user
+            ->submissions()
+            ->where("classroom_id", $classroom->id)
+            ->get();
+
+         // Nilai tugas berdasarkan urutan material_id
+         $taskScores = [];
+         foreach ($materialIds as $materialId) {
+            $score = $submissions->firstWhere("material_id", $materialId)->score ?? "-";
+            $taskScores[] = $score;
+         }
+
+         $validScores = $submissions->pluck("score")->filter();
+
+         return [
+            "name" => $fullname ?? $user->name,
+            "tasks" => $taskScores,
+            "average" => $validScores->avg() ?? "-",
+            "max" => $validScores->max() ?? "-",
+            "min" => $validScores->min() ?? "-",
+         ];
+      });
+
+      $today = now()->format("d-m-Y");
+      $filename = "Grade Recap From " . $classroom->title . " Class [" . $today . "].xlsx";
+
+      return Excel::download(new \App\Exports\RecapExport($recap, $materialIds, $classroom), $filename);
+   }
 }
