@@ -15,7 +15,7 @@
 						<div class="flex flex-col justify-center gap-3 relative">
 							<label class="px-3 font-medium text-[#414141] text-opacity-50" for="title">Title<span
 									class="text-red-500">*</span></label>
-							<input id="title" name="title" type="text" placeholder="Type your class title here..."
+							<input id="title" name="title" type="text" maxlength="32" placeholder="Type your class title here..."
 								value="{{ $classroom->title }}"
 								class="w-full py-4 px-3 text-[#414141] text-opacity-50 bg-[#e8e8e8] focus:outline-none rounded-md" required>
 							@error('title')
@@ -39,31 +39,6 @@
 									<option value="xii" {{ $classroom->class == 'xii' ? 'selected' : '' }}>XII</option>
 								</select>
 								@error('class')
-									<div class="text-red-600 text-xs absolute bottom-[-20px]">
-										{{ $message }}
-									</div>
-								@enderror
-							</div>
-						</div>
-
-						<div class="flex flex-col justify-center gap-3 relative">
-							<label class="px-3 font-medium text-[#414141] text-opacity-50" for="major">Major<span
-									class="text-red-500">*</span></label>
-							<div class="bg-[#e8e8e8] w-full rounded-md relative overflow-hidden">
-								<i
-									class="fa-solid fa-sort-down absolute right-[12px] text-[#414141] text-opacity-50 top-1/2 translate-y-[-70%]"></i>
-								<select name="major" id="major" required
-									class="w-full py-4 pl-3 pr-7 appearance-none bg-transparent outline-none text-[#414141] text-opacity-50 overflow-hidden text-ellipsis">
-									<option value="" disabled {{ !$classroom->major ? 'selected' : '' }}>Select your major</option>
-									<option value="pplg" {{ $classroom->major == 'pplg' ? 'selected' : '' }}>PENGEMBANGAN PERANGKAT LUNAK DAN GIM
-									</option>
-									<option value="dkv" {{ $classroom->major == 'dkv' ? 'selected' : '' }}>DESAIN KOMUNIKASI VISUAL</option>
-									<option value="akl" {{ $classroom->major == 'akl' ? 'selected' : '' }}>AKUNTANSI DAN KEUANGAN LEMBAGA
-									</option>
-									<option value="bdp" {{ $classroom->major == 'bdp' ? 'selected' : '' }}>BISNIS DARING DAN PEMASARAN</option>
-									<option value="mp" {{ $classroom->major == 'mp' ? 'selected' : '' }}>MANAJEMEN PERKANTORAN</option>
-								</select>
-								@error('major')
 									<div class="text-red-600 text-xs absolute bottom-[-20px]">
 										{{ $message }}
 									</div>

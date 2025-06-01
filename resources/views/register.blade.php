@@ -11,7 +11,7 @@
             <div class="w-full mb-4">
                 <div class="flex items-center border-b border-gray-300 pb-2">
                     <i class="fa-solid fa-user text-gray-500 mr-2"></i>
-                    <input type="text" name="name" value="{{ old('name') }}" placeholder="Name" class="w-full bg-transparent focus:outline-none placeholder-gray-400 text-gray-700">
+                    <input type="text" name="fullname" value="{{ old('fullname') }}" placeholder="Fullname" class="w-full bg-transparent focus:outline-none placeholder-gray-400 text-gray-700">
                 </div>
             </div>
             <div class="w-full mb-4">

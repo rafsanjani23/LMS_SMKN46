@@ -63,7 +63,7 @@
 								<img src="{{ Storage::url($class->thumbnail_class) }}" class="w-full h-full object-cover object-center"
 									alt="">
 							</div>
-							<h3 class="text-2xl font-semibold mt-5 mb-1">{{ $class->title }}</h3>
+							<h3 class="text-2xl font-semibold mt-5 mb-1 leading-tight min-h-[4rem]">{{ $class->title }}</h3>
 							<h5 class="text-sm mb-1">{{ $class->teacher->fullname }}</h5>
 							<h5 class="text-sm mb-2">{{ Str::upper($class->major) }}</h5>
 							<div class="flex items-center justify-start gap-2">

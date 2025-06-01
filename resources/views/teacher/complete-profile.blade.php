@@ -13,7 +13,7 @@
 						<div class="flex flex-col justify-center gap-3 relative">
 							<label class="px-3 font-medium text-[#414141] text-opacity-50" for="fullname">Fullname<span
 									class="text-red-500">*</span></label>
-							<input id="fullname" name="fullname" type="text" placeholder="Your name"
+							<input id="fullname" name="fullname" type="text" placeholder="Your name" value="{{ old('fullname', auth()->user()->fullname) }}"
 								class="w-full py-4 px-3 text-[#414141] text-opacity-50 bg-[#e8e8e8] focus:outline-none rounded-md" required>
 							@error('fullname')
 								<div class="text-red-600 text-xs absolute bottom-[-20px]">

@@ -5,6 +5,10 @@ namespace App\Providers;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Student;
+use App\Observers\StudentObserver;
+use App\Models\Teacher;
+use App\Observers\TeacherObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +31,7 @@ class AppServiceProvider extends ServiceProvider
       Gate::define("teacher", function (User $user) {
          return $user->role === "teacher";
       });
+      Student::observe(StudentObserver::class);
+      Teacher::observe(TeacherObserver::class);
    }
 }

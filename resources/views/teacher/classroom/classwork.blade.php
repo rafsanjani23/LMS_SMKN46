@@ -64,7 +64,7 @@
 						</div>
 						<div>
 							<h2 class="font-bold text-3xl">{{ $classroom->title }}</h2>
-							<p class="font-semibold text-lg my-3">Kelas {{ $classroom->classToNumber() }}</p>
+							<p class="font-semibold text-lg my-3">Kelas {{ strtoupper($classroom->class) }}</p>
 							<p class="font-semibold text-lg">{{ $classroom->teacher->fullname }}</p>
 							<p class="mt-4">{{ $classroom->instructions }}</p>
 						</div>

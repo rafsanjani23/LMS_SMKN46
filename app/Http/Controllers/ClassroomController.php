@@ -27,7 +27,7 @@ class ClassroomController extends Controller
    public function createClass(Request $request)
    {
       $validatedData = $request->validate([
-         "title" => "required|string|max:255",
+         "title" => "required|string|max:32",
          "class" => "required|in:x,xi,xii",
          "thumbnail_class" => "required|file|mimes:jpg,jpeg,png|max:3000",
          "instructions" => "nullable|string",
@@ -97,7 +97,7 @@ class ClassroomController extends Controller
    public function updateClass(Classroom $classroom, Request $request)
    {
       $validatedData = $request->validate([
-         "title" => "required|string|max:255",
+         "title" => "required|string|max:32",
          "class" => "required|in:x,xi,xii",
          "major" => "required|in:pplg,dkv,akl,mp,bdp,umum",
          "instructions" => "nullable|string",

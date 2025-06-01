@@ -22,7 +22,7 @@
                             type="text" 
                             name="fullname" 
                             id="fullname"
-                            value="{{ $users->teacher->fullname ?? '' }}" 
+                            value="{{ $users->fullname ?? '' }}" 
                             placeholder="Enter teacher's fullname"
                             class="flex-1 py-2 pr-4  focus:outline-none rounded-lg"
                             required>

@@ -46,8 +46,8 @@
 
     <div class="flex-1 flex justify-center items-center">
         <div class="flex-row mt-8">
-            <h1 class="text-4xl font-semibold text-[#3F3D56]">Welcome to Our Learning <br> Platform!</h1>
-            <p class="mt-2 text-slate-500">Discover an engaging and interactive learning experience. <br> Please log in to continue!</p>
+            <h1 class="text-4xl font-semibold text-[#3F3D56]">Welcome to the<br>Online Learning Platform<br>of SMK Negeri 46 Jakarta!</h1>
+            <p class="mt-2 text-slate-500">Turn curiosity into achievement. Your learning journey starts now.<br>Log in to begin!</p>
             <img class="w-[32rem]" src="{{ asset('img/loginImage.png') }}" alt="">
         </div>
     </div>

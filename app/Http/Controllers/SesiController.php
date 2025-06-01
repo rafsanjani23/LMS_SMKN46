@@ -20,7 +20,7 @@ class SesiController extends Controller
 
     function submitRegister(Request $request){
         $user = new User();
-        $user->name = $request->name;
+        $user->fullname = $request->fullname;
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);

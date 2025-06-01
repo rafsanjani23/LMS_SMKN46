@@ -65,7 +65,7 @@ class AdminController extends Controller
    function submitStudents(Request $request)
    {
       $user = new User();
-      $user->name = $request->name;
+      $user->fullname = $request->fullname;
       $user->username = $request->username;
       $user->email = $request->email;
       $user->password = bcrypt($request->password);
@@ -137,7 +137,7 @@ class AdminController extends Controller
    function submitTeacher(Request $request)
    {
       $user = new User();
-      $user->name = $request->name;
+      $user->fullname = $request->fullname;
       $user->username = $request->username;
       $user->email = $request->email;
       $user->password = bcrypt($request->password);
