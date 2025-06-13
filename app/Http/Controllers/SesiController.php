@@ -19,6 +19,17 @@ class SesiController extends Controller
     }
 
     function submitRegister(Request $request){
+
+        $request->validate(
+            [
+                "email" => ['required', 'email', 'regex:/@gmail\.com$/', 'unique:users,email'],
+            ],
+            [
+                "email.unique" => "Email is already exist",
+                "email.regex" => "Email must be @gmail.com",
+            ]
+        );
+      
         $user = new User();
         $user->fullname = $request->fullname;
         $user->username = $request->username;

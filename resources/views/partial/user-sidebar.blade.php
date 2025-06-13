@@ -6,6 +6,14 @@
 	</script>
 @endif
 
+@if (session()->has('complete.profile'))
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			window.needCompleteProfile = true;
+			window.completeProfileMessage = "{{ session('complete.profile') }}";
+		});
+	</script>
+@endif
 
 <aside id="sidebar" class="w-[300px] fixed top-[90px] lg:left-0 left-[-300px] bottom-0 z-[98] bg-white shadow">
 	@can('student')
@@ -95,3 +103,25 @@
 	@endcan
 
 </aside>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		if (window.needCompleteProfile) {
+			const sidebarLinks = document.querySelectorAll("#sidebar a.nav-link-sidebar");
+
+			sidebarLinks.forEach(link => {
+				link.addEventListener("click", function (e) {
+					e.preventDefault();
+
+					Swal.fire({
+						title: "Incomplete Profile",
+						text: "You need to complete your profile first!",
+						icon: "warning",
+						confirmButtonText: "OK",
+						confirmButtonColor: "#7166e0"
+					});
+				});
+			});
+		}
+	});
+</script>

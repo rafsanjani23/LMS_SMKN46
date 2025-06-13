@@ -30,15 +30,22 @@
 
 					@can('teacher')
 						<a
-							class="bg-[#A9BBF4] hover:bg-[#92a1d2] w-full flex items-center justify-center py-3 text-xl mt-6 font-semibold rounded"
-							href="/teacher/update-profile/{{ optional(Auth::user()->teacher)->nip }}">Update Profile</a>
+							href="/teacher/update-profile/{{ optional(Auth::user()->teacher)->nip }}"
+							class="bg-[#A9BBF4] hover:bg-[#92a1d2] w-full flex items-center justify-center py-3 text-xl mt-6 font-semibold rounded update-profile-btn"
+							data-profile-complete="{{ Auth::user()->teacher && Auth::user()->teacher->isProfileComplete() ? '1' : '0' }}">
+							Update Profile
+						</a>
 					@endcan
 
 					@can('student')
 						<a
-							class="bg-[#A9BBF4] hover:bg-[#92a1d2] w-full flex items-center justify-center py-3 text-xl mt-6 font-semibold rounded"
-							href="/update-profile/{{ optional(Auth::user()->student)->nis }}">Update Profile</a>
+							href="/update-profile/{{ optional(Auth::user()->student)->nis }}"
+							class="bg-[#A9BBF4] hover:bg-[#92a1d2] w-full flex items-center justify-center py-3 text-xl mt-6 font-semibold rounded update-profile-btn"
+							data-profile-complete="{{ Auth::user()->student && Auth::user()->student->isProfileComplete() ? '1' : '0' }}">
+							Update Profile
+						</a>
 					@endcan
+
 
 					<div
 						class="bg-[#4A5B92] hover:bg-[#3f4d7c] text-white w-full flex items-center justify-center  text-xl mt-3 font-semibold rounded overflow-hidden">
@@ -52,3 +59,27 @@
 		</div>
 	</div>
 </header>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const updateBtns = document.querySelectorAll(".update-profile-btn");
+
+		updateBtns.forEach(btn => {
+			btn.addEventListener("click", function (e) {
+				const isComplete = btn.dataset.profileComplete === "1";
+
+				if (!isComplete) {
+					e.preventDefault(); // blok navigasi
+					Swal.fire({
+						title: "Incomplete Profile",
+						text: "You need to complete your profile first!",
+						icon: "warning",
+						confirmButtonText: "OK",
+						confirmButtonColor: "#7166e0"
+					});
+				}
+			});
+		});
+	});
+</script>
