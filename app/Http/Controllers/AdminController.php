@@ -87,11 +87,13 @@ class AdminController extends Controller
    {
       $user = User::with('student')->findOrFail($id);
 
+      $user->fullname = $request->fullname;
+  
       if ($user->student) {
           $user->student->fullname = $request->fullname;
           $user->student->update();
       }
-      
+  
       $user->username = $request->username;
       $user->email = $request->email;
       $user->password = $request->password;
@@ -158,6 +160,8 @@ class AdminController extends Controller
    function updateTeacher(Request $request, $id)
    {
       $user = User::with('teacher')->findOrFail($id);
+
+      $user->fullname = $request->fullname;
 
       if ($user->teacher) {
           $user->teacher->fullname = $request->fullname;

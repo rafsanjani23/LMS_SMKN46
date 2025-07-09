@@ -23,7 +23,7 @@
                             name="fullname" 
                             id="fullname"
                             value="{{ $users->fullname ?? '' }}" 
-                            placeholder="Enter student's name"
+                            placeholder="Enter student's fullname"
                             class="flex-1 py-2 pr-4  focus:outline-none rounded-lg"
                             required>
                     </div>

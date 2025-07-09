@@ -25,7 +25,7 @@
 			<h3 class="text-xl font-semibold mt-4">{{ Auth::user()->username }}</h3>
 			<p class="text-sm">{{ ucfirst(Auth::user()->role) }}</p>
 			<a class="bg-[#A9BBF4] hover:bg-[#92a1d2] py-3 px-14 text-xl font-semibold mt-4 rounded"
-				href="{{ route('student.profile') }}">View
+				href="{{ route('student.profile') }}" data-requires-complete-profile="true">View
 				Profile</a>
 		</div>
 
@@ -60,7 +60,7 @@
 			<h3 class="text-xl font-semibold mt-4">{{ Auth::user()->username }}</h3>
 			<p class="text-sm">{{ ucfirst(Auth::user()->role) }}</p>
 			<a class="bg-[#A9BBF4] hover:bg-[#92a1d2] py-3 px-14 text-xl font-semibold mt-4 rounded"
-				href="{{ route('teacher.profile') }}">View
+				href="{{ route('teacher.profile') }}" data-requires-complete-profile="true">View
 				Profile</a>
 		</div>
 
@@ -107,15 +107,18 @@
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
 		if (window.needCompleteProfile) {
-			const sidebarLinks = document.querySelectorAll("#sidebar a.nav-link-sidebar");
+			// Gabungkan selector berdasarkan class dan atribut
+			const restrictedLinks = document.querySelectorAll(
+				"#sidebar a.nav-link-sidebar, #sidebar a[data-requires-complete-profile='true']"
+			);
 
-			sidebarLinks.forEach(link => {
+			restrictedLinks.forEach(link => {
 				link.addEventListener("click", function (e) {
 					e.preventDefault();
 
 					Swal.fire({
 						title: "Incomplete Profile",
-						text: "You need to complete your profile first!",
+						text: window.completeProfileMessage || "You need to complete your profile first!",
 						icon: "warning",
 						confirmButtonText: "OK",
 						confirmButtonColor: "#7166e0"
@@ -125,3 +128,4 @@
 		}
 	});
 </script>
+
