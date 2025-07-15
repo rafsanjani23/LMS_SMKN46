@@ -106,19 +106,16 @@
 
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
-		if (window.needCompleteProfile) {
-			// Gabungkan selector berdasarkan class dan atribut
-			const restrictedLinks = document.querySelectorAll(
-				"#sidebar a.nav-link-sidebar, #sidebar a[data-requires-complete-profile='true']"
-			);
-
-			restrictedLinks.forEach(link => {
+		const profileComplete = {{ (Auth::user()->student || Auth::user()->teacher) ? 'true' : 'false' }};
+		
+		if (!profileComplete) {
+			const links = document.querySelectorAll("#sidebar a.nav-link-sidebar, #sidebar a[data-requires-complete-profile='true']");
+			links.forEach(link => {
 				link.addEventListener("click", function (e) {
 					e.preventDefault();
-
 					Swal.fire({
 						title: "Incomplete Profile",
-						text: window.completeProfileMessage || "You need to complete your profile first!",
+						text: "Please complete your profile first!",
 						icon: "warning",
 						confirmButtonText: "OK",
 						confirmButtonColor: "#7166e0"

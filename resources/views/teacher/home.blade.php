@@ -32,7 +32,7 @@
 
 	{{-- Jumbotron --}}
 	<div id="jumbotron" class="w-full h-[40vh] flex items-center justify-center"
-		style="background-image: url('{{ asset($backgroundImage) }}'); background-size: cover; background-position: center;">
+		style="background-image: url('{{ url('herosection/' . basename($backgroundImage)) }}'); background-size: cover; background-position: center;">
 		<div class="w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
 			<p
 				class="text-center text-white font-semibold lg:leading-[60px] sm:leading-[50px] leading-[40px] lg:text-5xl sm:text-4xl text-3xl">

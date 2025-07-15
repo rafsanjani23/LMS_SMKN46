@@ -9,7 +9,7 @@
         <div class="card-body">
             <h2 class="card-header font-bold text-2xl">Register</h2>
             @if ($errors->has('email'))
-                <div class="bg-red-100 py-2 rounded text-sm mt-2 pl-2">
+                <div class="alert-error py-2 rounded text-sm mt-2 pl-2">
                     {{ $errors->first('email') }}
                 </div>
             @endif

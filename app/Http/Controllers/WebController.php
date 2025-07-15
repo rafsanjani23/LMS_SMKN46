@@ -32,7 +32,7 @@ class WebController extends Controller
 
       if ($tokenBefore) {
          $tokenTime = \Carbon\Carbon::parse($tokenBefore->created_at);
-         if ($tokenTime->diffInMinutes(now()) < 0) {
+         if ($tokenTime->diffInMinutes(now()) < 60) { // UNTUK MEMBERIKAN BATAS WAKTU SEND REQUEST EMAIL RESET PASSWORD
             return view("sudah-send-reset-password");
          }
 

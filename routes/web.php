@@ -134,3 +134,16 @@ Route::middleware(["auth"])->group(function () {
 
    Route::get('/teacher/classroom/{classroom}/recap/excel', [ClassroomController::class, 'exportExcel'])->name('teacher.classroom.recap.export.excel');
 });
+
+Route::get('/herosection/{filename}', function ($filename) {
+   $path = public_path('herosection/' . $filename);
+
+   if (!File::exists($path)) {
+       abort(404);
+   }
+
+   $file = File::get($path);
+   $type = File::mimeType($path);
+
+   return response($file)->header("Content-Type", $type);
+});
