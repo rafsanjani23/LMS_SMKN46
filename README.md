@@ -9,13 +9,13 @@ Sistem ini dibuat untuk membantu kegiatan belajar-mengajar di SMK Negeri 46 Jaka
 Proyek ini bertujuan untuk:
 - Menghadirkan sistem pembelajaran internal sekolah yang dapat di-host di server lokal.
 - Menyediakan tampilan antarmuka yang mencerminkan identitas visual SMKN 46 Jakarta.
-- Menggantikan platform eksternal seperti Google Classroom yang kurang fleksibel.
+- Menggantikan platform eksternal seperti Google Classroom.
 - Meningkatkan efisiensi guru dalam mengelola materi, tugas, dan penilaian siswa.
 
 ---
 
 ## ⚙️ Teknologi yang Digunakan
-- **Framework:** Laravel 10  
+- **Framework:** Laravel 11  
 - **Frontend:** Tailwind CSS  
 - **Basis Data:** MySQL  
 - **Metode Pengembangan:** Prototyping  
